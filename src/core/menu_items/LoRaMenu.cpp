@@ -1,15 +1,17 @@
 #if !defined(LITE_VERSION)
 #include "LoRaMenu.h"
 #include "core/display.h"
+#include "modules/SX1280/sx1280_jammer.h"
 #include "core/utils.h"
 #include "modules/lora/LoRaRF.h"
 
 void LoRaMenu::optionsMenu() {
-    options = {
-        {"Chat",             []() { lorachat(); }      },
-        {"Change username",  []() { changeusername(); }},
-        {"Change Frequency", []() { chfreq(); }        },
-    };
+   options = {
+    {"Chat",             []() { lorachat(); }      },
+    {"Change username",  []() { changeusername(); }},
+    {"Change Frequency", []() { chfreq(); }        },
+    {"SX1280 Jammer",    []() { sx1280_jammer_menu(); }},
+};
     addOptionToMainMenu();
     String txt = "LoRa";
     loopOptions(options, MENU_TYPE_SUBMENU, txt.c_str());
